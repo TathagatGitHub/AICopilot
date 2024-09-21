@@ -14,8 +14,9 @@ var aiConfig = builder.Configuration.GetSection("AIConfig");
 
 builder.Services.AddAzureOpenAIChatCompletion(
     deploymentName: aiConfig["DeploymentName"]!,
-    endpoint:aiConfig["Endpoint"]!,
-    "7c15ae1a4a8640bdbaad741285c822bb");
+    endpoint: aiConfig["Endpoint"]!,
+    apiKey: aiConfig["ApiKey"]!);
+// "7c15ae1a4a8640bdbaad741285c822bb");
 
 var app = builder.Build();
 
