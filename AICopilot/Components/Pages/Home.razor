@@ -5,6 +5,7 @@
 @using Microsoft.SemanticKernel.Connectors.Mistral
 @using Microsoft.SemanticKernel.Connectors.OpenAI;
 @using Microsoft.SemanticKernel.ChatCompletion;
+@using Microsoft.SemanticKernel.Connectors.Google
 @using OpenAI;
 
 @inject Kernel Kernel;
@@ -56,37 +57,15 @@ Welcome to your new app.
     private async Task SendMessage()
     {
         //Jan 2025
-        // Send the message and get the response
-        // OpenAIClient client = new OpenAIClient(new ApiKeyCredential("7c15ae1a4a8640bdbaad741285c822bb"));
-        // OpenAI.Chat.ChatClient chatService = client.GetChatClient(Model);
-        // var response = await chatService.CompleteChatAsync(message);
-
-        // Worked line of codes below
-
-        //1 - First response
-        // response = await Kernel.InvokePromptAsync<string>(message);
-
-        //2 Streaming response
-        // response = "";
-        // var chunks =  Kernel.InvokePromptStreamingAsync<string>(message);
-        // await foreach (var chunk in chunks)
-        // {
-        //     response += chunk;
-        //    // chunk = await Kernel.InvokePromptStreamingAsync<string>(message);
-        //     StateHasChanged();
-        // }
-
-        //3 Chat Hisotry
         chatHistory.AddUserMessage(message);
-        response = "";
-        var chunks = ChatService.GetStreamingChatMessageContentsAsync(chatHistory);//Kernel.InvokePromptStreamingAsync<string>(message);
-        await foreach (var chunk in chunks)
-        {
-            response += chunk;
-           // chunk = await Kernel.InvokePromptStreamingAsync<string>(message);
-            StateHasChanged();
-        }
-        chatHistory.AddAssistantMessage(response);
+        #pragma warning disable SKEXP0070
+IChatCompletionService chatCompletionService = new GoogleAIGeminiChatCompletionService("gemini-1.5-pro-latest","AIzaSyCgMgkukn3Y-OQUCBMoEcW6ITEhr7H4x9I");
+var chatreply = await chatCompletionService.GetChatMessageContentAsync(chatHistory);
+
+Console.WriteLine(chatreply.ToString());
+response=chatreply.ToString();
+
+        
 
     }
 
