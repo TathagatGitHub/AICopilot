@@ -9,6 +9,8 @@
   <ItemGroup>
     <PackageReference Include="Azure.Identity" Version="1.13.1" />
     <PackageReference Include="Microsoft.SemanticKernel" Version="1.32.0" />
+    <PackageReference Include="JC.SemanticKernel.Connectors.Mistral" Version="1.5.*" />
+    <PackageReference Include="Mistral.SDK" Version="2.0.0" />
   </ItemGroup>
 
 </Project>

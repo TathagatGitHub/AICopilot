@@ -1,11 +1,12 @@
 ﻿@page "/"
 @using Microsoft.SemanticKernel;
-@using Microsoft.SemanticKernel.Connectors.MistralAI;
-@using Microsoft.SemanticKernel.Connectors.AzureOpenAI;
+
+@using Microsoft.SemanticKernel.Connectors.AzureOpenAI
+@using Microsoft.SemanticKernel.Connectors.Mistral
 @using Microsoft.SemanticKernel.Connectors.OpenAI;
 @using Microsoft.SemanticKernel.ChatCompletion;
 @using OpenAI;
-@rendermode InteractiveServer;
+
 @inject Kernel Kernel;
 @using System.ClientModel;
 @inject IChatCompletionService ChatService;
